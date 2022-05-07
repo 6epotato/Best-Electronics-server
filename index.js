@@ -4,7 +4,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const { application } = require('express');
 require('dotenv').config()
 const app = express();
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 
 // middle ware 
 
