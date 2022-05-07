@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { application } = require('express');
 require('dotenv').config()
 const app = express();
 const port = process.env.port || 5000;
@@ -20,6 +21,7 @@ async function run() {
     try {
         await client.connect();
         const itemCollection = client.db('BestElectronics').collection('item');
+        const emailCollection = client.db('BestElectronics').collection('email')
 
         // find all items
         app.get('/item', async (req, res) => {
@@ -67,6 +69,13 @@ async function run() {
             const result = await itemCollection.deleteOne(query);
             res.send(result);
         });
+
+        // email collection app
+        app.post('/addEmail', async (req, res) => {
+            const email = req.body;
+            const result = await emailCollection.insertOne(email);
+            res.send(result);
+        })
 
     }
     finally {
