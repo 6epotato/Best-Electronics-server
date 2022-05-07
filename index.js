@@ -71,9 +71,18 @@ async function run() {
         });
 
         // email collection app
+
+        app.get('/addEmail', async (req, res) => {
+            const seeEmail = req.query.email;
+            const query = { email: seeEmail };
+            const cursor = emailCollection.find(query);
+            const email = await cursor.toArray();
+            res.send(email);
+        })
+
         app.post('/addEmail', async (req, res) => {
-            const email = req.body;
-            const result = await emailCollection.insertOne(email);
+            const addEmail = req.body;
+            const result = await emailCollection.insertOne(addEmail);
             res.send(result);
         })
 
