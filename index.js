@@ -106,6 +106,10 @@ app.get('/', (req, res) => {
     res.send("Running best electronic server")
 })
 
+app.get('/test', (req, res) => {
+    res.send('Testting is running')
+})
+
 
 app.listen(port, () => {
     console.log('listining port ', port);
